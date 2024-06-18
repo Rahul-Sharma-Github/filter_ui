@@ -10,23 +10,25 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarWidget(context),
-      body: Obx(
-        () => homePageController.products.isEmpty
-            ? Container(
-                alignment: Alignment.topCenter,
-                child: const Text('Nothing to show !'))
-            : ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: homePageController.products.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      '${homePageController.products[index]['itemname']}',
-                    ),
-                  );
-                },
-              ),
+      body: SafeArea(
+        child: Obx(
+          () => homePageController.products.isEmpty
+              ? Container(
+                  alignment: Alignment.topCenter,
+                  child: const Text('Nothing to show !'))
+              : ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: homePageController.products.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        '${homePageController.products[index]['itemname']}',
+                      ),
+                    );
+                  },
+                ),
+        ),
       ),
     );
   }
