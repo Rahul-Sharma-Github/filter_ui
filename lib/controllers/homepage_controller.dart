@@ -17,10 +17,11 @@ class HomePageController extends GetxController {
     await fetchProductsByCategoryAndPrice('', '');
   }
 
-  // Method to fetch Data by Price
+// Method to fetch Data by Category and Price
   Future<void> fetchProductsByCategoryAndPrice(
       String category, String price) async {
     try {
+      // if Both Empty
       if (price.isEmpty && category.isEmpty) {
         final response =
             await http.get(Uri.parse('http://10.0.2.2:3000/all-menu-items'));
@@ -35,7 +36,9 @@ class HomePageController extends GetxController {
               animationDuration: const Duration(milliseconds: 100),
               duration: const Duration(milliseconds: 1000));
         }
-      } else if (category.isNotEmpty && price.isNotEmpty) {
+      }
+      // if Both have value inside them
+      else if (category.isNotEmpty && price.isNotEmpty) {
         final response = await http.get(Uri.parse(
             'http://10.0.2.2:3000/menu-items-by-price-category/$category&$price'));
 
@@ -49,7 +52,9 @@ class HomePageController extends GetxController {
               animationDuration: const Duration(milliseconds: 100),
               duration: const Duration(milliseconds: 1000));
         }
-      } else if (price.isNotEmpty) {
+      }
+      // if price is not empty
+      else if (price.isNotEmpty) {
         final response = await http
             .get(Uri.parse('http://10.0.2.2:3000/menu-items-by-price/$price'));
 
@@ -63,7 +68,9 @@ class HomePageController extends GetxController {
               animationDuration: const Duration(milliseconds: 100),
               duration: const Duration(milliseconds: 1000));
         }
-      } else if (category.isNotEmpty) {
+      }
+      // if category is not empty
+      else if (category.isNotEmpty) {
         final response = await http
             .get(Uri.parse('http://10.0.2.2:3000/menu-items/$category'));
 
@@ -97,24 +104,31 @@ class HomePageController extends GetxController {
       selectedChoiceIndex.value = -1;
       // clearing selectedPrice value
       selectedPrice.value = '';
+      // calling method after unselecting choice chip
       await fetchProductsByCategoryAndPrice(
           selectedValue.value, selectedPrice.value);
+
       debugPrint('Before change = ${products.length}');
     } else {
       // if choice chip is not selected, then select it, and unselect all other choice chips
       selectedChoiceIndex.value = index;
       // store selected choice's string to a variable
       selectedPrice.value = choices[index];
+      // calling method after selecting choice chip
       await fetchProductsByCategoryAndPrice(
           selectedValue.value, selectedPrice.value);
+
       debugPrint('After change = ${products.length}');
     }
   }
 
   //////////////////////////////
 
-  // variable tp store selected Menu Item
+// variable to store selected Menu Item
+
+  // variable to store selected menu item
   var selectedValue = ''.obs;
+  // Menu Items
   var itemList = [
     'Salad',
     'Chinese',
