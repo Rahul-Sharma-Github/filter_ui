@@ -1,3 +1,5 @@
+import 'package:filter_ui/Pages/cartpage.dart';
+import 'package:filter_ui/controllers/cartpage_controller.dart';
 import 'package:filter_ui/controllers/homepage_controller.dart';
 import 'package:filter_ui/widgets/appbarwidget.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:get/get.dart';
 class Homepage extends StatelessWidget {
   Homepage({super.key});
   final HomePageController homePageController = Get.put(HomePageController());
+  final CartPageController cartPageController = Get.put(CartPageController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,11 @@ class Homepage extends StatelessWidget {
                         '${homePageController.products[index]['itemprice']} Rupee',
                       ),
                       trailing: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          cartPageController.addToCart(
+                              '${homePageController.products[index]['itemname']}');
+                          Get.to(() => CartPage());
+                        },
                         child: const Text('Add to Cart'),
                       ),
                     );
