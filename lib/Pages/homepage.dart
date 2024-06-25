@@ -25,6 +25,13 @@ class Homepage extends StatelessWidget {
                       title: Text(
                         '${homePageController.products[index]['itemname']}',
                       ),
+                      subtitle: Text(
+                        '${homePageController.products[index]['itemprice']} Rupee',
+                      ),
+                      trailing: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('Add to Cart'),
+                      ),
                     );
                   },
                 ),
