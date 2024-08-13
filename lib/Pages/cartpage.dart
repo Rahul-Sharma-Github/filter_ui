@@ -27,8 +27,9 @@ class CartPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(
-                      cartPageController.cartItems[index],
-                    ),
+                        '${cartPageController.cartItems[index]['itemname']}'),
+                    subtitle: Text(
+                        '${cartPageController.cartItems[index]['itemprice]']}'),
                     trailing: ElevatedButton(
                       onPressed: () {
                         cartPageController.removeFromCart(index);

@@ -33,8 +33,13 @@ class Homepage extends StatelessWidget {
                       ),
                       trailing: ElevatedButton(
                         onPressed: () {
-                          cartPageController.addToCart(
-                              '${homePageController.products[index]['itemname']}');
+                          cartPageController.addToCart({
+                            'itemname': homePageController.products[index]
+                                ['itemname'],
+                            'itemprice': homePageController.products[index]
+                                ['itemprice'],
+                            'itemcount': 1
+                          });
                           Get.to(() => CartPage());
                         },
                         child: const Text('Add to Cart'),

@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 
 class CartPageController extends GetxController {
   // List of items in Cart
-  List<String> cartItems = <String>[].obs;
+  List<Map> cartItems = [{}].obs;
 
   // to Add item to cart
-  void addToCart(String itemName) {
+  void addToCart(Map data) {
     try {
-      cartItems.addIf(!cartItems.contains(itemName), itemName);
+      // cartItems.addIf(!cartItems.contains(data), data);
+      cartItems.add(data);
     } catch (e) {
       debugPrint('Error while adding item to cart = $e');
     }
